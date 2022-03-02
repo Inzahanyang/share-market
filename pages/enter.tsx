@@ -61,7 +61,7 @@ const Enter: NextPage = () => {
                 </span>
                 <input
                   id="input"
-                  type="number"
+                  type="text"
                   className="w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-md focus:border-orange-500 focus:outline-none focus:ring-orange-500"
                   required
                 />
