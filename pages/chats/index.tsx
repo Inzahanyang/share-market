@@ -1,23 +1,26 @@
 import { NextPage } from "next";
+import Layout from "../../components/layout";
 
 const Chats: NextPage = () => {
   return (
-    <div className="divide-y py-10">
-      {[1, 1, 1, 1, 1, 1, 1].map((_, i) => (
-        <div
-          className="flex cursor-pointer items-center space-x-3 px-4 py-3"
-          key={i}
-        >
-          <div className="h-12 w-12 rounded-full bg-slate-300" />
-          <div>
-            <p className="text-gray-700">Steve Jobs</p>
-            <p className="text-sm text-gray-500">
-              See you tomorrow in the corner at 2pm!
-            </p>
+    <Layout hasTabBar title="채팅">
+      <div className=" divide-y-[1px]">
+        {[1, 1, 1, 1, 1, 1, 1].map((_, i) => (
+          <div
+            key={i}
+            className="flex cursor-pointer items-center space-x-4 px-4 py-5"
+          >
+            <div className="h-12 w-12 rounded-full bg-slate-300" />
+            <div>
+              <p className="text-gray-700">Steve Jebs</p>
+              <p className="text-sm  text-gray-500">
+                See you tomorrow in the corner at 2pm!
+              </p>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </Layout>
   );
 };
 
