@@ -1,15 +1,17 @@
 import { useState } from "react";
 
-interface UseMutationState {
+interface UseMutationState<T> {
   loading: boolean;
-  data?: object;
+  data?: T;
   error?: object;
 }
 
-type UseMutationResult = [(data: any) => void, UseMutationState];
+type UseMutationResult<T> = [(data: any) => void, UseMutationState<T>];
 
-export default function useMutation(url: string): UseMutationResult {
-  const [state, setState] = useState<UseMutationState>({
+export default function useMutation<T = any>(
+  url: string
+): UseMutationResult<T> {
+  const [state, setState] = useState<UseMutationState<T>>({
     loading: false,
     data: undefined,
     error: undefined,
@@ -17,7 +19,7 @@ export default function useMutation(url: string): UseMutationResult {
 
   function mutation(data: any) {
     setState((prev) => ({ ...prev, loading: true }));
-    fetch("/api/users/enter", {
+    fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
