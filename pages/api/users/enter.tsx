@@ -4,14 +4,14 @@ import client from "@libs/server/client";
 import twilio from "twilio";
 import mailgun from "mailgun-js";
 
-const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
+// const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
 
 async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) {
   const { email, phone } = req.body;
-  const user = phone ? { phone: +phone } : email ? { email } : null;
+  const user = phone ? { phone } : email ? { email } : null;
   if (!user) return res.status(400).json({ ok: false });
 
   const payload = Math.floor(100000 + Math.random() * 900000) + "";
@@ -20,13 +20,18 @@ async function handler(
       payload,
       user: {
         connectOrCreate: {
-          where: { ...user },
-          create: { name: "Anonymous", ...user },
+          where: {
+            ...user,
+          },
+          create: {
+            name: "Anonymous",
+            ...user,
+          },
         },
       },
     },
   });
-  return res.status(200).json({ ok: true });
+  console.log(token);
   if (phone) {
     // const message = await twilioClient.messages.create({
     //   messagingServiceSid: process.env.TWILIO_SID_B,
@@ -51,6 +56,7 @@ async function handler(
     //   console.log(body);
     // });
   }
+  return res.status(200).json({ ok: true });
 }
 
 export default withHandler("POST", handler);
