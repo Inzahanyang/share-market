@@ -9,6 +9,7 @@ export default function useUser() {
       .then((res) => res.json())
       .then((data) => {
         if (!data.ok) {
+          // return router.push("/enter");
           return router.replace("/enter");
         }
         setUser(data.profile);
