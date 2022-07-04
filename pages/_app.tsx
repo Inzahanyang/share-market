@@ -1,11 +1,15 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
+import { SWRConfig } from "swr";
+import "react-loading-skeleton/dist/skeleton.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="mx-auto w-full max-w-xl">
-      <Component {...pageProps} />
-    </div>
+    <SWRConfig value={{ fetcher: (url) => fetch(url).then((r) => r.json()) }}>
+      <div className="mx-auto w-full max-w-xl">
+        <Component {...pageProps} />
+      </div>
+    </SWRConfig>
   );
 }
 

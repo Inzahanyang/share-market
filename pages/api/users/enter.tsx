@@ -31,7 +31,6 @@ async function handler(
       },
     },
   });
-  console.log(token);
   if (phone) {
     // const message = await twilioClient.messages.create({
     //   messagingServiceSid: process.env.TWILIO_SID_B,
@@ -59,4 +58,4 @@ async function handler(
   return res.status(200).json({ ok: true });
 }
 
-export default withHandler({ method: "POST", handler, isPrivate: false });
+export default withHandler({ methods: ["POST"], handler, isPrivate: false });
