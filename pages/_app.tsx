@@ -5,7 +5,9 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <SWRConfig value={{ fetcher: (url) => fetch(url).then((r) => r.json()) }}>
+    <SWRConfig
+      value={{ fetcher: (url: string) => fetch(url).then((r) => r.json()) }}
+    >
       <div className="mx-auto w-full max-w-xl">
         <Component {...pageProps} />
       </div>
