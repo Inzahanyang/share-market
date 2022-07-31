@@ -8,7 +8,7 @@ import useSWR from "swr";
 import { Product } from "@prisma/client";
 import Skeleton from "react-loading-skeleton";
 
-interface ProductWithCount extends Product {
+export interface ProductWithCount extends Product {
   _count: {
     favs: number;
   };
