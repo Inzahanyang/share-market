@@ -20,8 +20,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!reviews)
     res.status(404).json({ ok: false, error: "There is no reviews..." });
 
-  console.log(reviews);
-
   res.json({
     ok: true,
     reviews,
