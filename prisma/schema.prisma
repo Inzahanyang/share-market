@@ -159,7 +159,7 @@ model Stream {
   updatedAt   DateTime  @updatedAt
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      Int
-  message     Message[]
+  messages    Message[]
   name        String
   description String    @db.MediumText
   price       Int
