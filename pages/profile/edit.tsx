@@ -41,7 +41,7 @@ const EditProfile: NextPage = () => {
     if (user?.phone) setValue("phone", user.phone);
     if (user?.avatar)
       setAvatarPreview(
-        `https://imagedelivery.net/6WVwiW2h0KvJliuEhpAT4A/${user.avatar}/public`
+        `https://imagedelivery.net/6WVwiW2h0KvJliuEhpAT4A/${user.avatar}/avatar`
       );
   }, [user, setValue]);
 
@@ -102,7 +102,7 @@ const EditProfile: NextPage = () => {
           {avatarPreview ? (
             <img
               src={avatarPreview}
-              className="h-14 w-14 rounded-full bg-slate-500"
+              className="h-14 w-14 rounded-full bg-slate-500 object-cover"
             />
           ) : (
             <div className="h-14 w-14 rounded-full bg-slate-500" />
