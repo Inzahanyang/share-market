@@ -39,16 +39,15 @@ const ItemDetail: NextPage = () => {
     <Layout canGoBack>
       <div className="px-4  py-4">
         <div className="mb-8">
-          <div className="h-96 bg-slate-300" />
+          <img
+            src={`https://imagedelivery.net/6WVwiW2h0KvJliuEhpAT4A/${data?.product.image}/public`}
+            className="h-96"
+          />
           <div className="flex cursor-pointer items-center space-x-3 border-t border-b py-3">
-            {data?.product.user.avatar ? (
-              <img
-                src={`https://imagedelivery.net/6WVwiW2h0KvJliuEhpAT4A/${data?.product.user.avatar}/avatar`}
-                className="h-16 w-16 rounded-full bg-slate-500 object-cover"
-              />
-            ) : (
-              <div className="h-16 w-16 rounded-full bg-slate-500" />
-            )}
+            <img
+              src={`https://imagedelivery.net/6WVwiW2h0KvJliuEhpAT4A/${data?.product.user.avatar}/avatar`}
+              className="h-16 w-16 rounded-full bg-slate-500 object-cover"
+            />
             <div>
               <p className="text-sm font-medium text-gray-700">
                 {data?.product?.user?.name}
