@@ -38,16 +38,32 @@ const ItemDetail: NextPage = () => {
   return (
     <Layout canGoBack>
       <div className="px-4  py-4">
-        <div className="mb-8">
-          <img
-            src={`https://imagedelivery.net/6WVwiW2h0KvJliuEhpAT4A/${data?.product.image}/public`}
-            className="h-96"
-          />
+        <div className="mb-8 flex flex-col justify-center">
+          {data?.product.image ? (
+            <div className="relative pb-80">
+              <Image
+                layout="fill"
+                src={`https://imagedelivery.net/6WVwiW2h0KvJliuEhpAT4A/${data?.product.image}/public`}
+                className="bg-white object-contain"
+                alt="product"
+              />
+            </div>
+          ) : (
+            <div className="h-96 w-full bg-slate-300" />
+          )}
+
           <div className="flex cursor-pointer items-center space-x-3 border-t border-b py-3">
-            <img
-              src={`https://imagedelivery.net/6WVwiW2h0KvJliuEhpAT4A/${data?.product.user.avatar}/avatar`}
-              className="h-16 w-16 rounded-full bg-slate-500 object-cover"
-            />
+            {data?.product.user.avatar ? (
+              <Image
+                width={48}
+                height={48}
+                src={`https://imagedelivery.net/6WVwiW2h0KvJliuEhpAT4A/${data?.product.user.avatar}/avatar`}
+                className="h-16 w-16 rounded-full bg-slate-500 object-cover"
+                alt="avatar"
+              />
+            ) : (
+              <div className="h-16 w-16 rounded-full bg-slate-500" />
+            )}
             <div>
               <p className="text-sm font-medium text-gray-700">
                 {data?.product?.user?.name}
@@ -64,7 +80,7 @@ const ItemDetail: NextPage = () => {
               {data?.product?.name}
             </h1>
             <span className="mt-3 block text-2xl text-gray-900">
-              {data?.product?.price}
+              ${data?.product?.price}
             </span>
             <p className=" my-6 text-gray-700">{data?.product?.description}</p>
             <div className="flex items-center justify-between space-x-2">

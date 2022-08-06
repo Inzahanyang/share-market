@@ -14,8 +14,10 @@ export default function Item({ title, id, price, hearts }: ItemProps) {
         <div className="flex space-x-4">
           <div className="h-20 w-20 rounded-md bg-gray-400" />
           <div className="flex flex-col pt-2">
-            <h3 className="text-sm font-medium text-gray-900">{title}</h3>
-            <span className="mt-1 font-medium text-gray-900">{price}</span>
+            <h3 className="font-medium text-gray-900">{title}</h3>
+            <span className="mt-1 text-sm font-medium text-gray-900">
+              ${price}
+            </span>
           </div>
         </div>
         <div className="flex items-end justify-end space-x-2">

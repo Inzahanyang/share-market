@@ -12,6 +12,7 @@ async function handler(
     const products = await client.product.findMany({
       take: 20,
       skip: (req.query.page ? +req.query.page - 1 : 0) * 20,
+      orderBy: { createdAt: "desc" },
       include: {
         _count: {
           select: {
