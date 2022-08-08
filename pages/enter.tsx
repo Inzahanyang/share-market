@@ -1,11 +1,23 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "@components/button";
 import Input from "@components/input";
 import useMutation from "@libs/client/useMutation";
 import { cls } from "@libs/client/utils";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+import Skeleton from "react-loading-skeleton";
+
+const DynamicCP = dynamic(
+  //@ts-ignore
+  () =>
+    new Promise((resolve) =>
+      setTimeout(() => resolve(import("@components/dynamicCP")), 5000)
+    ),
+  { ssr: false, suspense: true }
+  // { ssr: false, loading: () => <span>Loading...</span> }
+);
 
 interface EnterForm {
   email?: string;
@@ -122,14 +134,19 @@ const Enter: NextPage = () => {
                 />
               ) : null}
               {method === "phone" ? (
-                <Input
-                  register={register("phone")}
-                  name="phone"
-                  label="Phone number"
-                  type="text"
-                  kind="phone"
-                  required
-                />
+                <>
+                  <Suspense fallback={<Skeleton />}>
+                    <DynamicCP />
+                  </Suspense>
+                  <Input
+                    register={register("phone")}
+                    name="phone"
+                    label="Phone number"
+                    type="text"
+                    kind="phone"
+                    required
+                  />
+                </>
               ) : null}
               {method === "email" ? (
                 <Button text={loading ? "Loading" : "Get login link"} />
