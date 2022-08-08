@@ -38,7 +38,8 @@ const Home: NextPage = () => {
   const products = data ? data.map((item) => item.products).flat() : [];
   const page = useInfiniteScroll();
 
-  console.log(page);
+  console.log(products);
+
   useEffect(() => {
     setSize(page);
   }, [setSize, page]);
@@ -61,6 +62,7 @@ const Home: NextPage = () => {
                 title={product.name}
                 price={product.price}
                 hearts={product._count.favs}
+                image={product.image}
               />
             ))}
           </div>
