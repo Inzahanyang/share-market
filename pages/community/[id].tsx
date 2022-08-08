@@ -86,7 +86,7 @@ const CommunityPostDetail: NextPage = () => {
   }, [data, router, answerData, reset, mutate]);
 
   return (
-    <Layout canGoBack>
+    <Layout canGoBack seoTitle="질문 페이지">
       <div>
         <span className="my-3 ml-4 inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
           동네질문

@@ -31,7 +31,7 @@ const Streams: NextPage = () => {
   }, [page, router]);
 
   return (
-    <Layout hasTabBar title="라이브">
+    <Layout hasTabBar title="라이브" seoTitle="라이브 리스트">
       <div className=" space-y-4 divide-y-[1px]">
         {data?.streams.map((stream) => (
           <Link key={stream.id} href={`/streams/${stream.id}`}>

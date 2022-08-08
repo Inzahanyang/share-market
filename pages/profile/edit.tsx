@@ -97,7 +97,7 @@ const EditProfile: NextPage = () => {
   }, [avatar]);
 
   return (
-    <Layout canGoBack title="Edit Profile">
+    <Layout canGoBack title="Edit Profile" seoTitle="수정 페이지">
       <form onSubmit={handleSubmit(onValid)} className="space-y-4 py-10 px-4">
         <div className="flex items-center space-x-3">
           {avatarPreview ? (

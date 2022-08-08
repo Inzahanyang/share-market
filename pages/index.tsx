@@ -45,11 +45,7 @@ const Home: NextPage = () => {
   }, [setSize, page]);
 
   return (
-    <Layout title="홈" hasTabBar>
-      <Head>
-        <title>Home</title>
-      </Head>
-
+    <Layout title="홈" hasTabBar seoTitle="상품 리스트">
       <div className="flex flex-col space-y-5 divide-y">
         {isLoading ? (
           <Skeleton count={5} />

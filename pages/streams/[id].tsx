@@ -78,7 +78,10 @@ const Stream: NextPage = () => {
   };
 
   return (
-    <Layout canGoBack>
+    <Layout
+      canGoBack
+      seoTitle={data?.stream.name ? data.stream.name : "라이브 중"}
+    >
       <div className="space-y-4 py-10  px-4">
         {data?.stream.cloudflareId ? (
           <iframe

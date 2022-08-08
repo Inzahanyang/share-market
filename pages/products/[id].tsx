@@ -36,7 +36,7 @@ const ItemDetail: NextPage = () => {
   };
 
   return (
-    <Layout canGoBack>
+    <Layout canGoBack seoTitle="상품 디테일">
       <div className="px-4  py-4">
         <div className="mb-8 flex flex-col justify-center">
           {data?.product.image ? (
