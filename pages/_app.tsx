@@ -4,6 +4,7 @@ import { SWRConfig } from "swr";
 import "react-loading-skeleton/dist/skeleton.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  console.log("App is Running");
   return (
     <SWRConfig
       value={{ fetcher: (url: string) => fetch(url).then((r) => r.json()) }}
