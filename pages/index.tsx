@@ -2,13 +2,13 @@ import type { NextPage } from "next";
 import FloatingButton from "@components/floating-button";
 import Item from "@components/item";
 import Layout from "@components/layout";
-import useUser from "@libs/client/useUser";
-import Head from "next/head";
 import useSWRInfinite from "swr/infinite";
 import { Product } from "@prisma/client";
 import Skeleton from "react-loading-skeleton";
 import { useInfiniteScroll } from "@libs/client/utils";
 import { useEffect } from "react";
+import client from "@libs/server/client";
+import { SWRConfig, unstable_serialize } from "swr";
 
 export interface ProductWithCount extends Product {
   _count: {
@@ -22,23 +22,15 @@ interface ProductsResponse {
 }
 
 const getKey = (pageIndex: number, previousPageData: ProductsResponse) => {
-  if (pageIndex === 0) return `/api/products?page=1`;
-
-  if (pageIndex + 1 > previousPageData.pages) return null;
+  if (previousPageData && !previousPageData.products.length) return null;
 
   return `/api/products?page=${pageIndex + 1}`;
 };
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 const Home: NextPage = () => {
-  const { user, isLoading } = useUser();
+  const { data, setSize } = useSWRInfinite<ProductsResponse>(getKey);
 
-  const { data, setSize } = useSWRInfinite<ProductsResponse>(getKey, fetcher);
-  const products = data ? data.map((item) => item.products).flat() : [];
   const page = useInfiniteScroll();
-
-  console.log(products);
 
   useEffect(() => {
     setSize(page);
@@ -47,22 +39,23 @@ const Home: NextPage = () => {
   return (
     <Layout title="홈" hasTabBar seoTitle="상품 리스트">
       <div className="flex flex-col space-y-5 divide-y">
-        {isLoading ? (
-          <Skeleton count={5} />
-        ) : (
-          <div>
-            {products?.map((product) => (
+        {data ? (
+          data.map((result) => {
+            return result.products.map((product) => (
               <Item
                 key={product.id}
                 id={product.id}
                 title={product.name}
                 price={product.price}
-                hearts={product._count.favs}
+                hearts={product._count?.favs}
                 image={product.image}
               />
-            ))}
-          </div>
+            ));
+          })
+        ) : (
+          <Skeleton count={10} />
         )}
+
         <FloatingButton href="/products/upload">
           <svg
             className="h-6 w-6"
@@ -85,4 +78,47 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+const Page: NextPage<ProductsResponse> = ({ products, pages }) => {
+  return (
+    <SWRConfig
+      value={{
+        fallback: {
+          [unstable_serialize(getKey)]: [
+            {
+              ok: true,
+              products,
+              pages,
+            },
+          ],
+        },
+      }}
+    >
+      <Home />
+    </SWRConfig>
+  );
+};
+
+export async function getServerSideProps() {
+  const products = await client.product.findMany({
+    include: {
+      _count: {
+        select: {
+          favs: true,
+        },
+      },
+    },
+    take: 10,
+    skip: 0,
+  });
+
+  const productCount = await client.product.count();
+  return {
+    props: {
+      ok: true,
+      products: JSON.parse(JSON.stringify(products)),
+      pages: Math.ceil(productCount / 10),
+    },
+  };
+}
+
+export default Page;
