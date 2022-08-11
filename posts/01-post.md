@@ -1,9 +1,13 @@
 ---
 title: Welcome Everyone
-data: 2022.08.11
+date: 2022.08.11
 category: car
 ---
 
 # Welcome everyone!
 
 test md
+
+- my fav is apple
+- also carrot
+- thanks everyone
