@@ -65,15 +65,18 @@ const Upload: NextPage = () => {
   }, [data, router]);
 
   return (
-    <Layout canGoBack title="Upload Product">
+    <Layout canGoBack title="Upload Product" seoTitle="상품 업로드">
       <form className="space-y-4 p-4" onSubmit={handleSubmit(onValid)}>
         <div>
           {photoPreview ? (
-            <Image
-              alt="upload"
-              src={photoPreview}
-              className=" h-48 w-full rounded-md object-contain text-gray-600"
-            />
+            <div className="relative pb-80">
+              <Image
+                alt="upload"
+                layout="fill"
+                src={photoPreview}
+                className=" h-48 w-full rounded-md object-contain text-gray-600"
+              />
+            </div>
           ) : (
             <label className="flex h-48 w-full cursor-pointer items-center justify-center rounded-md border-2 border-dashed border-gray-300 text-gray-600 hover:border-orange-500 hover:text-orange-500">
               <svg

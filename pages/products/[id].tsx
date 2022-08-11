@@ -134,9 +134,16 @@ const ItemDetail: NextPage = () => {
             {data?.relatedProducts?.map((product) => (
               <Link href={`/products/${product.id}`} key={product.id}>
                 <a>
-                  <div className="mb-4 h-56 w-full bg-slate-300" />
-                  <h3 className="-mb-1 text-gray-700">${product.name}</h3>
-                  <span className="text-sm font-medium text-gray-900">
+                  <div className="relative pb-80">
+                    <Image
+                      alt="similar item"
+                      src={`https://imagedelivery.net/6WVwiW2h0KvJliuEhpAT4A/${product.image}/public`}
+                      layout="fill"
+                      className="mb-4 h-56 w-full bg-slate-300"
+                    />
+                  </div>
+                  <h3 className="-mb-1 text-gray-700">{product.name}</h3>
+                  <span className="mt-2 block text-sm font-medium text-gray-900">
                     ${product.price}
                   </span>
                 </a>

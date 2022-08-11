@@ -10,8 +10,8 @@ async function handler(
   if (req.method === "GET") {
     const productCount = await client.product.count();
     const products = await client.product.findMany({
-      take: 20,
-      skip: (req.query.page ? +req.query.page - 1 : 0) * 20,
+      take: 10,
+      skip: (req.query.page ? +req.query.page - 1 : 0) * 10,
       orderBy: { createdAt: "desc" },
       include: {
         _count: {
@@ -25,7 +25,7 @@ async function handler(
     res.json({
       ok: true,
       products,
-      pages: Math.ceil(productCount / 20),
+      pages: Math.ceil(productCount / 10),
     });
   }
   if (req.method === "POST") {
