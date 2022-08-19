@@ -112,6 +112,9 @@ export async function getServerSideProps() {
   });
 
   const productCount = await client.product.count();
+
+  // await new Promise((resolve) => setTimeout(resolve, 5000));
+
   return {
     props: {
       ok: true,
