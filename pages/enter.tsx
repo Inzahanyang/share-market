@@ -73,7 +73,9 @@ const Enter: NextPage = () => {
 
   return (
     <div className="mt-16 px-4">
-      <h3 className="text-center text-3xl font-bold">Enter to Carrot</h3>
+      <h3 className="text-center text-3xl font-bold">
+        Welcome To Share-Market
+      </h3>
       <div className="mt-12">
         {data?.ok ? (
           <form
