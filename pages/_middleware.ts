@@ -5,9 +5,9 @@ export function middleware(req: NextRequest, ev: NextFetchEvent) {
     return new Response("Plz don't be a bot");
   }
 
-  // if (!req.url.includes("/api")) {
-  //   if (!req.url.includes(`/enter`) && !req.cookies.sharemarket) {
-  //     return NextResponse.redirect(`${req.nextUrl.origin}/enter`);
-  //   }
-  // }
+  if (!req.url.includes("/api")) {
+    if (!req.url.includes(`/enter`) && !req.cookies.sharemarket) {
+      return NextResponse.rewrite(new URL("/enter", req.url));
+    }
+  }
 }
